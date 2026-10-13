@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560">
+  <defs>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b000ff"/>
+      <stop offset="1" stop-color="#5600d9"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="560" fill="#050308"/>
+  <g fill="none" stroke="url(#purple)" stroke-width="5" opacity=".9">
+    <path d="M600 42 L624 130 L704 155 L624 177 L600 258 L576 177 L496 155 L576 130 Z"/>
+    <path d="M175 300 L205 265 L230 300 L205 335 Z"/>
+    <path d="M1025 300 L1055 265 L1080 300 L1055 335 Z"/>
+    <path d="M600 418 L615 458 L655 473 L615 488 L600 528 L585 488 L545 473 L585 458 Z"/>
+  </g>
+  <g stroke="#7000d8" stroke-width="5" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M265 152 L215 110 L223 174 L190 211 L220 241 L210 305 L260 340 L350 337 L411 290 L438 210 L403 156 L354 125 L313 139 Z" fill="#100b1b"/>
+    <path d="M935 152 L985 110 L977 174 L1010 211 L980 241 L990 305 L940 340 L850 337 L789 290 L762 210 L797 156 L846 125 L887 139 Z" fill="#100b1b"/>
+    <path d="M255 207 L291 177 L333 187 L361 215 L341 254 L300 272 L264 248 Z" fill="#ded5f5" stroke="#8c39ff" stroke-width="4"/>
+    <path d="M945 207 L909 177 L867 187 L839 215 L859 254 L900 272 L936 248 Z" fill="#160a2b" stroke="#8c39ff" stroke-width="4"/>
+    <path d="M269 211 L296 218 L317 208 L335 220 L347 215 L335 235 L309 244 L283 233 Z" fill="#08050d" stroke="none"/>
+    <path d="M931 211 L904 218 L883 208 L865 220 L853 215 L865 235 L891 244 L917 233 Z" fill="#08050d" stroke="none"/>
+    <path d="M282 251 Q308 276 334 248" fill="none" stroke="#08050d" stroke-width="8"/>
+    <path d="M918 251 Q892 276 866 248" fill="none" stroke="#8c39ff" stroke-width="8"/>
+    <path d="M410 220 L458 188 L488 223 L470 292 L430 310" fill="#0d0817"/>
+    <path d="M790 220 L742 188 L712 223 L730 292 L770 310" fill="#0d0817"/>
+    <path d="M460 275 L420 365 L500 405 L600 390 L700 405 L780 365 L740 275 L675 310 L600 285 L525 310 Z" fill="#0c0713"/>
+    <path d="M560 285 L545 330 L600 352 L655 330 L640 285" fill="#170a2b"/>
+  </g>
+  <g fill="url(#purple)" stroke="#bd62ff" stroke-width="2">
+    <path d="M142 330 L265 330 L295 366 L267 351 L145 351 Z"/>
+    <path d="M1058 330 L935 330 L905 366 L933 351 L1055 351 Z"/>
+  </g>
+  <text x="600" y="442" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="106" font-weight="900" letter-spacing="5" fill="url(#purple)" stroke="#a73cff" stroke-width="1.5">INFECTRA</text>
+  <path d="M250 462 L470 462 L500 478 L700 478 L730 462 L950 462" fill="none" stroke="url(#purple)" stroke-width="5"/>
+  <text x="600" y="515" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" letter-spacing="7" fill="#b9a0d8">DARK BY DESIGN</text>
+</svg>

@@ -1,7 +1,7 @@
 # INFECTRA PANEL
 
 <p align="center">
-  <img src="INFECTRA.svg" alt="INFECTRA Logo" width="520">
+  <img src="INFECTRA.png" alt="INFECTRA Logo" width="520">
 </p>
 
 <h3 align="center">A Dark Interface. A Powerful Identity.</h3>

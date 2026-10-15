@@ -79,7 +79,7 @@ cd /var/www/pterodactyl
 php artisan down
 ```
 
-### 4. Download the INFECTRA ZIP
+### 4. Download the INFECTRA archive
 
 ```bash
 curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.tar.gz" -o /tmp/infectra-panel-redesign.tar.gz
@@ -87,7 +87,7 @@ curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/in
 
 If the download fails, check that a published GitHub Release actually contains an asset named exactly `infectra-panel-redesign.tar.gz`.
 
-### 5. Inspect the ZIP before installing
+### 5. Inspect the archive before installing
 
 List the archive contents first:
 

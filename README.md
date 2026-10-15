@@ -33,10 +33,10 @@ Before installing, make sure you have:
 
 - A working Pterodactyl Panel installation and administrator/root access to its server
 - The panel directory (commonly `/var/www/pterodactyl`)
-- A compatible INFECTRA release archive: `infectra-panel-redesign.tar.gz`
+- The INFECTRA release asset currently named `infectra-panel-redesign.tar.gz` (the downloaded file is actually a ZIP archive)
 - A backup of your panel files and database
 
-> **Compatibility notice:** Always verify that the ZIP contents match your installed Pterodactyl Panel version. This guide does not guarantee compatibility with every panel version or every archive layout. Do not install an archive you have not checked.
+> **Archive format notice:** The GitHub release asset is named `infectra-panel-redesign.tar.gz`, but its contents are a ZIP archive. The commands below save it locally as `.zip` and use `unzip`. Always verify the ZIP contents match your installed Pterodactyl Panel version. Do not install an archive you have not checked.
 
 ## Complete Installation Guide
 
@@ -82,7 +82,7 @@ php artisan down
 ### 4. Download the INFECTRA archive
 
 ```bash
-curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.tar.gz" -o /tmp/infectra-panel-redesign.tar.gz
+curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.tar.gz" -o /tmp/infectra-panel-redesign.zip
 ```
 
 If the download fails, check that a published GitHub Release actually contains an asset named exactly `infectra-panel-redesign.tar.gz`.
@@ -92,14 +92,15 @@ If the download fails, check that a published GitHub Release actually contains a
 List the archive contents first:
 
 ```bash
-tar -tzf /tmp/infectra-panel-redesign.tar.gz
+unzip -t /tmp/infectra-panel-redesign.zip
+unzip -l /tmp/infectra-panel-redesign.zip
 ```
 
 Extract it into a temporary directory so you can check its layout:
 
 ```bash
 mkdir -p /tmp/infectra-panel-redesign
-tar -xzf /tmp/infectra-panel-redesign.tar.gz -C /tmp/infectra-panel-redesign
+unzip /tmp/infectra-panel-redesign.zip -d /tmp/infectra-panel-redesign
 find /tmp/infectra-panel-redesign -maxdepth 3 -type f | head -80
 ```
 
@@ -158,7 +159,7 @@ If the panel fails, enable maintenance mode if needed and restore the files/data
 ## Troubleshooting
 
 - **404 or download failure:** Confirm the release is published and the asset name is exactly `infectra-panel-redesign.tar.gz`.
-- **Archive extraction error:** Re-download the archive and inspect it with `unzip -l`.
+- **Archive extraction error:** Re-download the asset, then run `unzip -t /tmp/infectra-panel-redesign.zip` and `unzip -l /tmp/infectra-panel-redesign.zip`. Although the release asset name ends in `.tar.gz`, the current file is a ZIP archive; use `unzip`, not `tar -xzf`.
 - **Blank page or server error:** Check `/var/www/pterodactyl/storage/logs/` and your web-server/PHP-FPM logs.
 - **Permission errors:** Verify the panel path and web-server user; avoid applying broad permissions to the entire server.
 - **Theme does not appear:** Confirm the correct files were copied into the panel root and clear the caches again.
@@ -167,7 +168,7 @@ If the panel fails, enable maintenance mode if needed and restore the files/data
 
 - **Platform:** Pterodactyl Panel
 - **Theme:** INFECTRA
-- **Release archive:** `infectra-panel-redesign.tar.gz`
+- **GitHub release asset name:** `infectra-panel-redesign.tar.gz` (actual archive format: ZIP)
 - **Compatibility:** Depends on the archive contents and installed panel version
 
 ## License

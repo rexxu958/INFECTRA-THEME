@@ -82,10 +82,10 @@ php artisan down
 ### 4. Download the INFECTRA archive
 
 ```bash
-curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.tar.gz" -o /tmp/infectra-panel.zip
+curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/panel-infectra.tar.gz" -o /tmp/infectra-panel.zip
 ```
 
-If the download fails, note that the current GitHub Release asset is still named `infectra-panel-redesign.tar.gz`; the command downloads that asset but saves it locally as `/tmp/infectra-panel.zip`. Rename the Release asset separately if you want its GitHub download URL to use `infectra-panel.tar.gz`.
+If the download fails, note that the current GitHub Release asset is still named `panel-infectra.tar.gz`; the command downloads that asset but saves it locally as `/tmp/infectra-panel.zip`. Rename the Release asset separately if you want its GitHub download URL to use `infectra-panel.tar.gz`.
 
 ### 5. Inspect the archive before installing
 

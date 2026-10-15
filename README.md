@@ -33,7 +33,7 @@ Before installing, make sure you have:
 
 - A working Pterodactyl Panel installation and administrator/root access to its server
 - The panel directory (commonly `/var/www/pterodactyl`)
-- A compatible INFECTRA release archive: `infectra-panel-redesign.zip`
+- A compatible INFECTRA release archive: `infectra-panel-redesign.tar.gz`
 - A backup of your panel files and database
 
 > **Compatibility notice:** Always verify that the ZIP contents match your installed Pterodactyl Panel version. This guide does not guarantee compatibility with every panel version or every archive layout. Do not install an archive you have not checked.
@@ -82,24 +82,24 @@ php artisan down
 ### 4. Download the INFECTRA ZIP
 
 ```bash
-curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.zip" -o /tmp/infectra-panel-redesign.zip
+curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.tar.gz" -o /tmp/infectra-panel-redesign.tar.gz
 ```
 
-If the download fails, check that a published GitHub Release actually contains an asset named exactly `infectra-panel-redesign.zip`.
+If the download fails, check that a published GitHub Release actually contains an asset named exactly `infectra-panel-redesign.tar.gz`.
 
 ### 5. Inspect the ZIP before installing
 
 List the archive contents first:
 
 ```bash
-unzip -l /tmp/infectra-panel-redesign.zip
+tar -tzf /tmp/infectra-panel-redesign.tar.gz
 ```
 
 Extract it into a temporary directory so you can check its layout:
 
 ```bash
 mkdir -p /tmp/infectra-panel-redesign
-unzip -o /tmp/infectra-panel-redesign.zip -d /tmp/infectra-panel-redesign
+tar -xzf /tmp/infectra-panel-redesign.tar.gz -C /tmp/infectra-panel-redesign
 find /tmp/infectra-panel-redesign -maxdepth 3 -type f | head -80
 ```
 
@@ -113,7 +113,7 @@ Only if inspection confirms that the extracted archive's contents are arranged t
 cp -a /tmp/infectra-panel-redesign/. /var/www/pterodactyl/
 ```
 
-If the ZIP contains a nested directory or has its own installation script, follow the package's actual directory structure and instructions instead. Do not run an unfamiliar script without reviewing it first.
+If the archive contains a nested directory or has its own installation script, follow the package's actual directory structure and instructions instead. Do not run an unfamiliar script without reviewing it first.
 
 ### 7. Set ownership and permissions
 
@@ -157,8 +157,8 @@ If the panel fails, enable maintenance mode if needed and restore the files/data
 
 ## Troubleshooting
 
-- **404 or download failure:** Confirm the release is published and the asset name is exactly `infectra-panel-redesign.zip`.
-- **ZIP extraction error:** Re-download the archive and inspect it with `unzip -l`.
+- **404 or download failure:** Confirm the release is published and the asset name is exactly `infectra-panel-redesign.tar.gz`.
+- **Archive extraction error:** Re-download the archive and inspect it with `unzip -l`.
 - **Blank page or server error:** Check `/var/www/pterodactyl/storage/logs/` and your web-server/PHP-FPM logs.
 - **Permission errors:** Verify the panel path and web-server user; avoid applying broad permissions to the entire server.
 - **Theme does not appear:** Confirm the correct files were copied into the panel root and clear the caches again.
@@ -167,7 +167,7 @@ If the panel fails, enable maintenance mode if needed and restore the files/data
 
 - **Platform:** Pterodactyl Panel
 - **Theme:** INFECTRA
-- **Release archive:** `infectra-panel-redesign.zip`
+- **Release archive:** `infectra-panel-redesign.tar.gz`
 - **Compatibility:** Depends on the archive contents and installed panel version
 
 ## License

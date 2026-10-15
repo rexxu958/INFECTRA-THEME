@@ -45,10 +45,12 @@ php artisan down
 
 ### 3. Download and extract INFECTRA
 
-The release archive is named `panel-infectra-saas.tar.gz`.
+The release archive is named `infectra-panel-redesign.zip`.
 
 ```bash
-curl -fL https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/panel-infectra-saas.tar.gz | tar -xzv
+curl -fL https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.zip -o infectra-panel-redesign.zip
+unzip -o infectra-panel-redesign.zip -d .
+rm infectra-panel-redesign.zip
 ```
 
 ### 4. Set permissions
@@ -109,7 +111,7 @@ Open your panel and verify that it works correctly. If an error occurs, inspect 
 
 - **Platform:** Pterodactyl Panel
 - **Theme package:** INFECTRA
-- **Archive:** `panel-infectra-saas.tar.gz`
+- **Archive:** `infectra-panel-redesign.zip`
 - **Compatibility:** Depends on the archive contents and installed panel version
 
 ## License

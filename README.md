@@ -33,10 +33,10 @@ Before installing, make sure you have:
 
 - A working Pterodactyl Panel installation and administrator/root access to its server
 - The panel directory (commonly `/var/www/pterodactyl`)
-- The INFECTRA release asset currently named `infectra-panel.tar.gz` (the downloaded file is actually a ZIP archive)
+- The INFECTRA release asset currently named `infectra-panel-halloween-ungu.1.zip` (the downloaded file is actually a ZIP archive)
 - A backup of your panel files and database
 
-> **Archive format notice:** The GitHub release asset is named `infectra-panel.tar.gz`, but its contents are a ZIP archive. The commands below save it locally as `.zip` and use `unzip`. Always verify the ZIP contents match your installed Pterodactyl Panel version. Do not install an archive you have not checked.
+> **Archive format notice:** The GitHub release asset is named `infectra-panel-halloween-ungu.1.zip`, but its contents are a ZIP archive. The commands below save it locally as `.zip` and use `unzip`. Always verify the ZIP contents match your installed Pterodactyl Panel version. Do not install an archive you have not checked.
 
 ## Complete Installation Guide
 
@@ -82,25 +82,25 @@ php artisan down
 ### 4. Download the INFECTRA archive
 
 ```bash
-curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/panel-infectra.tar.gz" -o /tmp/infectra-panel.zip
+curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-halloween-ungu.1.zip" -o /tmp/infectra-panel-halloween-ungu.1.zip
 ```
 
-If the download fails, note that the current GitHub Release asset is still named `panel-infectra.tar.gz`; the command downloads that asset but saves it locally as `/tmp/infectra-panel.zip`. Rename the Release asset separately if you want its GitHub download URL to use `infectra-panel.tar.gz`.
+If the download fails, note that the current GitHub Release asset is still named `infectra-panel-halloween-ungu.1.zip`; the command downloads that asset but saves it locally as `/tmp/infectra-panel-halloween-ungu.1.zip`. Rename the Release asset separately if you want its GitHub download URL to use `infectra-panel-halloween-ungu.1.zip`.
 
 ### 5. Inspect the archive before installing
 
 List the archive contents first:
 
 ```bash
-unzip -t /tmp/infectra-panel.zip
-unzip -l /tmp/infectra-panel.zip
+unzip -t /tmp/infectra-panel-halloween-ungu.1.zip
+unzip -l /tmp/infectra-panel-halloween-ungu.1.zip
 ```
 
 Extract it into a temporary directory so you can check its layout:
 
 ```bash
 mkdir -p /tmp/infectra-panel
-unzip /tmp/infectra-panel.zip -d /tmp/infectra-panel
+unzip /tmp/infectra-panel-halloween-ungu.1.zip -d /tmp/infectra-panel
 find /tmp/infectra-panel -maxdepth 3 -type f | head -80
 ```
 
@@ -158,8 +158,8 @@ If the panel fails, enable maintenance mode if needed and restore the files/data
 
 ## Troubleshooting
 
-- **404 or download failure:** Confirm the release is published and the asset name is exactly `infectra-panel.tar.gz`.
-- **Archive extraction error:** Re-download the asset, then run `unzip -t /tmp/infectra-panel.zip` and `unzip -l /tmp/infectra-panel.zip`. Although the release asset name ends in `.tar.gz`, the current file is a ZIP archive; use `unzip`, not `tar -xzf`.
+- **404 or download failure:** Confirm the release is published and the asset name is exactly `infectra-panel-halloween-ungu.1.zip`.
+- **Archive extraction error:** Re-download the asset, then run `unzip -t /tmp/infectra-panel-halloween-ungu.1.zip` and `unzip -l /tmp/infectra-panel-halloween-ungu.1.zip`. Although the release asset name ends in `.tar.gz`, the current file is a ZIP archive; use `unzip`, not `tar -xzf`.
 - **Blank page or server error:** Check `/var/www/pterodactyl/storage/logs/` and your web-server/PHP-FPM logs.
 - **Permission errors:** Verify the panel path and web-server user; avoid applying broad permissions to the entire server.
 - **Theme does not appear:** Confirm the correct files were copied into the panel root and clear the caches again.
@@ -168,7 +168,7 @@ If the panel fails, enable maintenance mode if needed and restore the files/data
 
 - **Platform:** Pterodactyl Panel
 - **Theme:** INFECTRA
-- **GitHub release asset name:** `infectra-panel.tar.gz` (actual archive format: ZIP)
+- **GitHub release asset name:** `infectra-panel-halloween-ungu.1.zip` (actual archive format: ZIP)
 - **Compatibility:** Depends on the archive contents and installed panel version
 
 ## License

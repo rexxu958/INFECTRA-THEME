@@ -18,100 +18,156 @@
 
 ## Overview
 
-**INFECTRA** is a panel theme project built around a dark, mysterious aesthetic. Deep black surfaces and vivid purple accents create a recognizable visual identity while keeping the interface focused and uncluttered.
+**INFECTRA** gives compatible Pterodactyl Panel installations a dark interface with purple accents and a distinct visual identity.
 
 ## Features
 
-- **Dark interface** with a black foundation
-- **Purple accents** inspired by the INFECTRA brand
-- **Consistent visual identity** for your panel
-- **Installation guide** for compatible Pterodactyl Panel environments
+- Dark interface with black surfaces
+- Purple INFECTRA accents
+- Modern, consistent visual style
+- Installation and recovery guidance
 
-## Installation
+## Requirements
 
-> **Important:** Back up your panel files and database before updating. Replacing panel files can break compatibility if the archive does not match your installed Pterodactyl version. Verify the archive contents and compatibility before proceeding.
+Before installing, make sure you have:
 
-### 1. Enter the panel directory
+- A working Pterodactyl Panel installation and administrator/root access to its server
+- The panel directory (commonly `/var/www/pterodactyl`)
+- A compatible INFECTRA release archive: `infectra-panel-redesign.zip`
+- A backup of your panel files and database
+
+> **Compatibility notice:** Always verify that the ZIP contents match your installed Pterodactyl Panel version. This guide does not guarantee compatibility with every panel version or every archive layout. Do not install an archive you have not checked.
+
+## Complete Installation Guide
+
+Run the commands on the server hosting your Pterodactyl **Panel**, not on a Wings node unless the panel is installed there too. Commands below assume Ubuntu and the standard panel directory `/var/www/pterodactyl`. Change the path if your installation uses a different location.
+
+### 1. Open the panel directory
 
 ```bash
 cd /var/www/pterodactyl
 ```
 
-### 2. Enable maintenance mode
+Confirm this is the correct directory:
 
 ```bash
+test -f artisan && echo "Pterodactyl panel directory confirmed"
+```
+
+If `artisan` is not found, stop and locate your actual panel directory before continuing.
+
+### 2. Back up the current panel files
+
+Create a backup before replacing anything:
+
+```bash
+sudo tar -czf "/root/pterodactyl-files-backup-$(date +%F-%H%M).tar.gz" -C /var/www pterodactyl
+```
+
+Also back up your database using your own database name and credentials. For a MySQL/MariaDB installation, the general command is:
+
+```bash
+mysqldump -u YOUR_DATABASE_USER -p YOUR_DATABASE_NAME > ~/pterodactyl-database-backup.sql
+```
+
+Replace the placeholders with your actual values. Keep both backups somewhere safe.
+
+### 3. Enable maintenance mode
+
+```bash
+cd /var/www/pterodactyl
 php artisan down
 ```
 
-### 3. Download and extract INFECTRA
-
-The release archive is named `infectra-panel-redesign.zip`.
+### 4. Download the INFECTRA ZIP
 
 ```bash
-curl -fL https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.zip -o infectra-panel-redesign.zip
-unzip -o infectra-panel-redesign.zip -d .
-rm infectra-panel-redesign.zip
+curl -fL "https://github.com/rexxu958/INFECTRA-THEME/releases/latest/download/infectra-panel-redesign.zip" -o /tmp/infectra-panel-redesign.zip
 ```
 
-### 4. Set permissions
+If the download fails, check that a published GitHub Release actually contains an asset named exactly `infectra-panel-redesign.zip`.
+
+### 5. Inspect the ZIP before installing
+
+List the archive contents first:
 
 ```bash
-chmod -R 755 storage/ bootstrap/cache
+unzip -l /tmp/infectra-panel-redesign.zip
 ```
 
-### 5. Update dependencies (only if required)
-
-Run this only if the release requires dependency changes and you have verified the package configuration.
+Extract it into a temporary directory so you can check its layout:
 
 ```bash
-composer install --no-dev --optimize-autoloader
+mkdir -p /tmp/infectra-panel-redesign
+unzip -o /tmp/infectra-panel-redesign.zip -d /tmp/infectra-panel-redesign
+find /tmp/infectra-panel-redesign -maxdepth 3 -type f | head -80
 ```
 
-### 6. Clear cached files
+Check the extracted files and any installation instructions included in the archive. **Do not copy files blindly** if the ZIP contains a nested project directory, unrelated files, or files intended for a different panel version.
+
+### 6. Copy the theme files into the panel
+
+Only if inspection confirms that the extracted archive's contents are arranged to merge directly into the root of your existing Pterodactyl installation, copy them with:
 
 ```bash
+cp -a /tmp/infectra-panel-redesign/. /var/www/pterodactyl/
+```
+
+If the ZIP contains a nested directory or has its own installation script, follow the package's actual directory structure and instructions instead. Do not run an unfamiliar script without reviewing it first.
+
+### 7. Set ownership and permissions
+
+For a typical Ubuntu installation using Nginx and PHP-FPM, restore ownership of writable Laravel directories:
+
+```bash
+chown -R www-data:www-data /var/www/pterodactyl/storage /var/www/pterodactyl/bootstrap/cache
+chmod -R 755 /var/www/pterodactyl/storage /var/www/pterodactyl/bootstrap/cache
+```
+
+Use the correct web-server account for your environment. If the panel requires different permissions, follow the official instructions for your installed version.
+
+### 8. Clear the panel caches
+
+```bash
+cd /var/www/pterodactyl
 php artisan view:clear
 php artisan config:clear
 php artisan cache:clear
 ```
 
-### 7. Run database migrations only if required
+Do not run database migrations, `composer install`, or asset-build commands automatically just for a theme. Run them only if the release's verified instructions explicitly require them and you have checked compatibility.
 
-Back up your database first. Do not run migrations blindly when updating a theme-only package.
-
-```bash
-php artisan migrate --seed --force
-```
-
-### 8. Set ownership
-
-For a typical Ubuntu installation using Nginx:
-
-```bash
-chown -R www-data:www-data /var/www/pterodactyl
-```
-
-Use the correct web-server account for your operating system and configuration.
-
-### 9. Restart queue workers
-
-```bash
-php artisan queue:restart
-```
-
-### 10. Exit maintenance mode
+### 9. Bring the panel back online
 
 ```bash
 php artisan up
+php artisan queue:restart
 ```
 
-Open your panel and verify that it works correctly. If an error occurs, inspect the application logs before trying additional changes.
+If your environment uses a different queue or PHP-FPM service setup, restart only the relevant services according to your server configuration.
+
+### 10. Verify the installation
+
+1. Open your panel URL and sign in.
+2. Check the dashboard, navigation, server pages, and mobile layout.
+3. Check the browser developer console and server logs for errors.
+4. Confirm that existing servers, users, and settings still work.
+
+If the panel fails, enable maintenance mode if needed and restore the files/database from your backups. Do not delete the backups until the installation has been verified.
+
+## Troubleshooting
+
+- **404 or download failure:** Confirm the release is published and the asset name is exactly `infectra-panel-redesign.zip`.
+- **ZIP extraction error:** Re-download the archive and inspect it with `unzip -l`.
+- **Blank page or server error:** Check `/var/www/pterodactyl/storage/logs/` and your web-server/PHP-FPM logs.
+- **Permission errors:** Verify the panel path and web-server user; avoid applying broad permissions to the entire server.
+- **Theme does not appear:** Confirm the correct files were copied into the panel root and clear the caches again.
 
 ## Compatibility
 
 - **Platform:** Pterodactyl Panel
-- **Theme package:** INFECTRA
-- **Archive:** `infectra-panel-redesign.zip`
+- **Theme:** INFECTRA
+- **Release archive:** `infectra-panel-redesign.zip`
 - **Compatibility:** Depends on the archive contents and installed panel version
 
 ## License
